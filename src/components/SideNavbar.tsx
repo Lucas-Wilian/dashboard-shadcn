@@ -1,23 +1,32 @@
 "use client";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
+import { Nav } from "./ui/nav";
 import {
-  ChevronRight,
-  LayoutDashboard,
-  Settings,
   ShoppingCart,
+  LayoutDashboard,
   UsersRound,
+  Settings,
+  ChevronRight,
 } from "lucide-react";
 import { Button } from "./ui/button";
-import { Nav } from "./ui/nav";
-
-import { useWindowWidth } from "@react-hook/window-size";
 
 type Props = {};
 
 export default function SideNavbar({}: Props) {
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const onlyWidth = useWindowWidth();
-  const mobileWidth = onlyWidth < 768;
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const mobileWidth = windowWidth < 768;
 
   function toggleSidebar() {
     setIsCollapsed(!isCollapsed);
@@ -52,7 +61,7 @@ export default function SideNavbar({}: Props) {
             variant: "ghost",
           },
           {
-            title: "Ordrs",
+            title: "Orders",
             href: "/orders",
             icon: ShoppingCart,
             variant: "ghost",
