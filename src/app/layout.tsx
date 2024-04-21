@@ -13,14 +13,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen w-full bg-white text-black flex",
+          "min-h-screen w-full bg-white text-black flex ",
           inter.className,
           {
             "debug-screens": process.env.NODE_ENV === "development",
@@ -28,7 +28,7 @@ export default function RootLayout({
         )}
       >
         <SideNavbar />
-        <div> {children}</div>
+        <div className="p-8 w-full">{children}</div>
       </body>
     </html>
   );
