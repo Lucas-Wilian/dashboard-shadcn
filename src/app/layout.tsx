@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import SideNavbar from "@/components/SideNavbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
           }
         )}
       >
+        <SideNavbar />
         <div> {children}</div>
       </body>
     </html>
